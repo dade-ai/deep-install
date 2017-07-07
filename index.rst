@@ -6,15 +6,17 @@
 Welcome to deep-install's documentation!
 ========================================
 
+* :ref:`search`
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
+   :glob:
 
-
+   content/*
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`
