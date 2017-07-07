@@ -51,7 +51,7 @@ mount
 ---
 ```
 mkdir /data
-sudo mount xxx.xxx.xxx.xxx:/data /data  # change ip
+sudo mount server.ip.add.ress:/data /data  # change ip
 ```
 
 fstab
@@ -61,5 +61,5 @@ fstab
 sudo nano /etc/fstab
 ```
 ```
-203.0.113.0:/data       /data      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+server.ip.add.ress:/data       /data      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
 ```
