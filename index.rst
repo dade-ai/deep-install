@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to deep-install's documentation!
+cheat sheet for quick installation
 ========================================
 
 * :ref:`search`
