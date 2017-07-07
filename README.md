@@ -1,4 +1,4 @@
-Install related
+Install related ![](https://travis-ci.org/dade-ai/deep-install.svg?branch=master)
 ====
 
 [visit site](dade-ai.github.io/deep-install)
