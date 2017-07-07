@@ -33,9 +33,6 @@ firewall check
 ```
 sudo ufw status
 
-# if active
-sudo ufw allow from 203.0.113.0 to any port nfs
-sudo ufw status
 
 ```
 
@@ -54,7 +51,7 @@ mount
 ---
 ```
 mkdir /data
-sudo mount 203.0.113.0:/data /data
+sudo mount xxx.xxx.xxx.xxx:/data /data  # change ip
 ```
 
 fstab
