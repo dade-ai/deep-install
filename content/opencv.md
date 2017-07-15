@@ -32,9 +32,44 @@ $ git clone --depth=1 https://github.com/opencv/opencv_extra.git
 $ cd opencv && mkdir build && cd build
 ```
 
+
 build settings
 ---
 
+note: check numpy path. the number of cuda architecture
+
+cpu version
+
+```sh
+cmake -D CMAKE_BUILD_TYPE=Release \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_IPP=ON \
+-D BUILD_TIFF=ON \
+-D BUILD_EXAMPLES=OFF \
+-D USE_FFMPEG=YES \
+-D INSTALL_C_EXAMPLES=OFF \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D CUDA_GENERATION=OFF \
+-D CUDA_FAST_MATH=0 \
+-D WITH_CUBLAS=0 \
+-D ENABLE_FAST_MATH=1 \
+-D BUILD_PYTHON_SUPPORT=ON \
+-D WITH_OPENGL=ON \
+-D WITH_TBB=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ \
+-D OPENCV_TEST_DATA_PATH=../../opencv_extra/testdata/ \
+-D PYTHON2_EXECUTABLE=/usr/bin/python2.7 \
+-D PYTHON_INCLUDE_DIR=/usr/include/python2.7/ \
+-D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python2.7/ \
+-D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
+-D PYTHON_NUMPY_INCLUDE_DIRS=/usr/local/lib/python2.7/dist-packages/numpy/core/include/ \
+-D PYTHON2_NUMPY_INCLUDE_DIRS=/usr/local/lib/python2.7/dist-packages/numpy/core/include/ \
+-D WITH_QT=ON -D WITH_OPENGL=ON ..
+
+```
+
+
+with gpu version
 
 ```sh
 cmake -D CMAKE_BUILD_TYPE=Release \
@@ -46,7 +81,8 @@ cmake -D CMAKE_BUILD_TYPE=Release \
 -D INSTALL_C_EXAMPLES=OFF \
 -D INSTALL_PYTHON_EXAMPLES=ON \
 -D CUDA_GENERATION=Auto -D CUDA_ARCH_BIN=6.1 -D CUDA_ARCH_PTX=6.1 \
--D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 \
+-D CUDA_FAST_MATH=1 \
+-D WITH_CUBLAS=1 \
 -D ENABLE_FAST_MATH=1 \
 -D BUILD_PYTHON_SUPPORT=ON \
 -D WITH_OPENGL=ON \
