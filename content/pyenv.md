@@ -1,5 +1,6 @@
 pyenv 설치
 ===
+작성 시점과 차이가 있을 수 있음.
 
 설치
 ---
@@ -31,25 +32,38 @@ $ git clone https://github.com/yyuu/pyenv-pip-rehash.git ~/.pyenv/plugins/pyenv-
 $ exec $SHELL
 ```
 
-python 3.5.0 설치
+python build requirements
 ---
 ```sh
-# $ pyenv install 3.5.0
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
+```
+
+```sh
+apt install tk-dev
+# 깔고 python compile 해야 matplotlib. tkinter 작동?
+```
+
+
+python 3.6.2 설치
+---
+```sh
+# $ pyenv install 3.6.2
 # 대신 몇가지 빌드 플래그를 추가한다.
-$ env CFLAGS="-O3 -fPIC" CONFIGURE_OPTS="--enable-shared" pyenv install 3.5.0
+$ env CFLAGS="-O3 -fPIC" CONFIGURE_OPTS="--enable-shared" pyenv install 3.6.2
 ```
 
 python 버전 선택
 ---
 ```sh
 # pyenv 사용법은 생략한다.
-$ pyenv global 3.5.0
+$ pyenv global 3.6.2
 ```
 
 잘 설치되었는지 확인
 ```sh
 $ python --version
-Python 3.5.0
+Python 3.6.2
 $ which python
 $ which pip
 ```
@@ -63,12 +77,7 @@ $ mkdir ~/.pyenv/cache
 $ pip install -U pip
 ```
 
-python build requirements
----
-```sh
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
-```
+
 
 ipython
 ---

@@ -8,10 +8,18 @@ build
 
 ```sh
 <!-- numpy, dev, pip, wheel -->
+# https://www.tensorflow.org/install/install_linux
 
 sudo apt-get install libcupti-dev
+
+# 최신 protobuf 버전 확인
+# https://github.com/google/protobuf/releases
+
 sudo -H pip install --upgrade \
   https://storage.googleapis.com/tensorflow/linux/cpu/protobuf-3.1.0-cp27-none-linux_x86_64.whl
+
+pip3 install --upgrade \
+  https://storage.googleapis.com/tensorflow/linux/cpu/protobuf-3.1.0-cp35-none-linux_x86_64.whl
 
 
 ```
