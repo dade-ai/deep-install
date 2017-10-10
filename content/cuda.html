@@ -1,0 +1,204 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>nvidia driver and cudatoolkit &#8212; deep-install 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cudnn install" href="cudnn.html" />
+    <link rel="prev" title="chainer" href="chainer.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nvidia-driver-and-cudatoolkit">
+<h1>nvidia driver and cudatoolkit<a class="headerlink" href="#nvidia-driver-and-cudatoolkit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="nvida-driver">
+<h2>nvida driver<a class="headerlink" href="#nvida-driver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">graphics</span><span class="o">-</span><span class="n">drivers</span><span class="o">/</span><span class="n">ppa</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Now, find Software &amp; Updates under System Settings and select the
+required driver version form the Additional Drivers tab, select the
+driver and click Apply Changes. Restart and Enjoy!</p>
+</div>
+<div class="section" id="cudatoolkit">
+<h2>cudatoolkit<a class="headerlink" href="#cudatoolkit" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>설치 순서는 …<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">https://developer.nvidia.com/cuda-toolkit</a> 가서</li>
+<li><code class="docutils literal"><span class="pre">linux</span></code>, <code class="docutils literal"><span class="pre">x86_64</span></code>, <code class="docutils literal"><span class="pre">ubuntu</span></code>, <code class="docutils literal"><span class="pre">14.04</span></code>, <code class="docutils literal"><span class="pre">deb(local)</span></code> 선택</li>
+<li>다운로드</li>
+<li>친절하게도 설치 명령어를 보여준다. 시키는 데로 하자.</li>
+</ul>
+<p>현재 cuda 7.5 기준이고, 위 사항이 설치환경이 맞다면 아래 명령어를 줄줄이
+실행시키면 됩니다. 터미널 작업만 할수 있는 환경이라면 아래가 편하겠죠?</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># 1.9 기가바이트나 됩니다. 좀 걸려요~
+$ wget http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
+$ sudo apt-get update
+$ sudo apt-get install cuda
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>환경 설정<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>라이브러리</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># cuda 툴킷이 나중에 버전이 올라간다거나 하면, 다른 환경이 바뀌면 불편할 테니.
+# cuda-7.5 에 소프트링크를 잡아주고 설정하자.
+# 폴더 소프트링크 하나 만들어주고 자동으로 만들어주네요.
+# $ sudo ln -s /usr/local/cuda-7.5 /usr/local/cuda
+
+# 라이브러리 설정을 잡아주자.
+# 라이브러리 path 7.0, 7.5 두줄 설정이 들어가게 된다.
+$ echo &quot;/usr/local/cuda/lib64&quot; | sudo tee -a /etc/ld.so.conf.d/cuda.conf
+$ sudo ldconfig
+</pre></div>
+</div>
+<p>쿠다 환경변수</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># 쿠다환경변수 저장
+$ sudo nano /etc/profile.d/cuda.sh
+# 다음을 쓰고 저장
+export CUDA_HOME=/usr/local/cuda
+export PATH=${PATH}:${CUDA_HOME}/bin
+
+# 적용
+$ source /etc/profile.d/cuda.sh
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">deep-install</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0.install.html">ubuntu install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#cuda">cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#development-tools">development tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#python-common">python common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#tensorflow">tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#new-pc-setups">new pc setups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">basic tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html#java8">java8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bazel.html">bazel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caffe.html">caffe install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgkit.html">cgkit install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chainer.html">chainer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nvidia driver and cudatoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cudnn.html">cudnn install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cupy.html">cupy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html">dlib install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html#install">install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html#unit-test">unit test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmov.html">gmov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hydrogen.remote.html">server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter.html">iPython (jupyter) 설치</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mocapplayer.html">fltk build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html">shareing by nfs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html#server-side">server side</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html#client-side">client side</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">numpy openblas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.html">opencv 3.2 install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.3.3.html">opencv 3.3 빌드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.3.3.html#so">필요하면 *.so파일 복사 혹은 링크</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openface.html">openface install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osx.tcltk.html">tcl-tk (OSX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.git.venv.html">shell prompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyenv.html">pyenv 설치</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.common.pkg.html">python common packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow.html">tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torch7.html">torch7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torch7.html#issue">issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vi.env.html">vim home, end, pageup, pagedown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualbox.html">virtualbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode.tip.html">python remote debugging</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chainer.html" title="previous chapter">chainer</a></li>
+      <li>Next: <a href="cudnn.html" title="next chapter">cudnn install</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, dade-ai.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/content/cuda.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

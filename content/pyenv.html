@@ -1,0 +1,237 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pyenv 설치 &#8212; deep-install 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="python common packages" href="python.common.pkg.html" />
+    <link rel="prev" title="shell prompt" href="prompt.git.venv.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyenv">
+<h1>pyenv 설치<a class="headerlink" href="#pyenv" title="Permalink to this headline">¶</a></h1>
+<p>작성 시점과 차이가 있을 수 있음.</p>
+<div class="section" id="id1">
+<h2>설치<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>환경설정<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ nano .bashrc
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval &quot;$(pyenv init -)&quot;
+eval &quot;$(pyenv virtualenv-init -)&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>추가 플러그인 설치<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/yyuu/pyenv-pip-rehash.git ~/.pyenv/plugins/pyenv-pip-rehash
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>쉘 리스타트<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ exec $SHELL
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-build-requirements">
+<h2>python build requirements<a class="headerlink" href="#python-build-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">make</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span> <span class="n">libbz2</span><span class="o">-</span><span class="n">dev</span> \
+<span class="n">libreadline</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">wget</span> <span class="n">curl</span> <span class="n">llvm</span> <span class="n">libncurses5</span><span class="o">-</span><span class="n">dev</span> <span class="n">libncursesw5</span><span class="o">-</span><span class="n">dev</span> <span class="n">xz</span><span class="o">-</span><span class="n">utils</span>
+</pre></div>
+</div>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">install</span> <span class="n">tk</span><span class="o">-</span><span class="n">dev</span>
+<span class="c1"># 깔고 python compile 해야 matplotlib. tkinter 작동?</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-3-6-2">
+<h2>python 3.6.2 설치<a class="headerlink" href="#python-3-6-2" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># $ pyenv install 3.6.2
+# 대신 몇가지 빌드 플래그를 추가한다.
+$ env CFLAGS=&quot;-O3 -fPIC&quot; CONFIGURE_OPTS=&quot;--enable-shared&quot; pyenv install 3.6.2
+</pre></div>
+</div>
+</div>
+<div class="section" id="python">
+<h2>python 버전 선택<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># pyenv 사용법은 생략한다.
+$ pyenv global 3.6.2
+</pre></div>
+</div>
+<p>잘 설치되었는지 확인</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ python --version
+Python 3.6.2
+$ which python
+$ which pip
+</pre></div>
+</div>
+</div>
+<div class="section" id="pip">
+<h2>pip 업그레이드<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span># 패키지 빌드 캐시 폴더 생성
+$ mkdir ~/.pyenv/cache
+# 앞으로 sudo는 붙이지 않는다.
+$ pip install -U pip
+</pre></div>
+</div>
+</div>
+<div class="section" id="ipython">
+<h2>ipython<a class="headerlink" href="#ipython" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ pip install jupyter
+</pre></div>
+</div>
+<p>qtconsole이 필요하다면 pyside 3.5 설치가 pip 에러 발생</p>
+<div class="code sh highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install libqt4-dev libphonon-dev libxml2-dev libxslt1-dev qtmobility-dev libqtwebkit-dev libshiboken-dev
+# sudo apt-get install build-essential git cmake qt5-default libxml2 libxslt
+# $ wget https://pypi.python.org/packages/source/P/PySide/PySide-1.2.4.tar.gz
+# $ tar -xvzf PySide-1.2.4.tar.gz
+# $ cd PySide-1.2.4
+$ git clone https://github.com/PySide/pyside-setup.git pyside-setup
+# setup.py 편집 3.5 서포트 추가
+$ python setup.py build --jobs=8
+$ python setup.py install
+$ pip install pygments pyzmq
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">deep-install</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0.install.html">ubuntu install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#cuda">cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#development-tools">development tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#python-common">python common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#tensorflow">tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.install.html#new-pc-setups">new pc setups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">basic tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html#java8">java8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bazel.html">bazel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caffe.html">caffe install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgkit.html">cgkit install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chainer.html">chainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuda.html">nvidia driver and cudatoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cudnn.html">cudnn install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cupy.html">cupy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html">dlib install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html#install">install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.html#unit-test">unit test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmov.html">gmov</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hydrogen.remote.html">server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter.html">iPython (jupyter) 설치</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mocapplayer.html">fltk build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html">shareing by nfs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html#server-side">server side</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nfs.mount.html#client-side">client side</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">numpy openblas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.html">opencv 3.2 install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.3.3.html">opencv 3.3 빌드</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opencv.3.3.html#so">필요하면 *.so파일 복사 혹은 링크</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openface.html">openface install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osx.tcltk.html">tcl-tk (OSX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prompt.git.venv.html">shell prompt</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyenv 설치</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.common.pkg.html">python common packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow.html">tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torch7.html">torch7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torch7.html#issue">issue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vi.env.html">vim home, end, pageup, pagedown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualbox.html">virtualbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode.tip.html">python remote debugging</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="prompt.git.venv.html" title="previous chapter">shell prompt</a></li>
+      <li>Next: <a href="python.common.pkg.html" title="next chapter">python common packages</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, dade-ai.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/content/pyenv.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
